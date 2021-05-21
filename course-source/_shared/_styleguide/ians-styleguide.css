@@ -1,0 +1,801 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*  
+
+.##.....##....###....########...######.
+.##.....##...##.##...##.....##.##....##
+.##.....##..##...##..##.....##.##......
+.##.....##.##.....##.########...######.
+..##...##..#########.##...##.........##
+...##.##...##.....##.##....##..##....##
+....###....##.....##.##.....##..######.
+ */
+
+:root {
+	--size-25: 0.25rem;
+	--size-50: 0.5rem;
+	--size-75: 0.75rem;
+	--size-80: 0.8rem;
+	--size-100: 1rem;
+	--size-120: 1.1rem;
+	--size-200: 1.5rem;
+	--size-300: 2rem;
+	--size-400: 2.25rem;
+	--size-500: 3rem;
+
+	--column-max-width: 75ch;
+
+	--colour-ians-highlight: #2990ea;
+	--colour-ians-dark-highlight: yellow;
+	--colour-ians-header: #05a;
+	--colour-ians-darkblue: #0f1120;
+
+	--ians-colour-blue-light: #2990ea;
+	--ians-colour-blue-mid: #05a;
+	--ians-colour-blue-dark: #0f1120;
+
+	--ians-colour-grey-light: #fafafa;
+	--ians-colour-grey-mid: #ccc;
+	--ians-colour-grey-dark: #333;
+
+	--ians-colour-highlight-light: yellow;
+	--ians-colour-highlight-mid: gold;
+	--ians-colour-highlight-dark: darkorange;
+
+	--ians-size-sides-small: 0.5rem;
+	--ians-grid-gaps: 0.5rem;
+}
+
+/* 
+
+..######...#######..########..########
+.##....##.##.....##.##.....##.##......
+.##.......##.....##.##.....##.##......
+.##.......##.....##.########..######..
+.##.......##.....##.##...##...##......
+.##....##.##.....##.##....##..##......
+..######...#######..##.....##.########
+
+*/
+
+/* https://systemfontstack.com/ */
+
+/* 
+  .ians-fix-short stretches the footer to stick it to the bottom
+  on rare pages that are too short. This breaks the scroll to top function
+	but that shouldn't be used on short pages.
+*/
+html,
+body.ians-fix-short {
+	height: 100%;
+}
+
+body {
+	background: #fff;
+	color: var(--ians-colour-grey-dark);
+	line-height: 1.7;
+	font-family: roboto, -apple-system, BlinkMacSystemFont, avenir next, avenir,
+		segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
+	font-weight: 300;
+	padding: 0;
+}
+
+body.ians-fix-short {
+	display: flex;
+	flex-direction: column;
+}
+
+header {
+	width: 100%;
+	padding: 0 var(--ians-size-sides-small);
+}
+
+.ians-breadcrumb {
+	margin-top: 2rem;
+	margin-bottom: 0.5rem;
+	color: var(--ians-colour-blue-light);
+	text-transform: uppercase;
+	text-align: right;
+	font-size: small;
+	align-self: start;
+	/* Unlike other paragraphs, we want this to align fully right. */
+	max-width: 100%;
+}
+
+.ians-breadcrumb::before {
+	content: ":: ";
+	font-weight: bold;
+	width: 3px;
+	display: inline-block;
+	height: inherit;
+	display: inline-block;
+	margin-right: 0.75rem;
+}
+
+.ians-text-instruction {
+	color: hotpink;
+	font-weight: bold;
+}
+
+.ians-text-instruction::before {
+	content: "\2192";
+	display: inline-block;
+	margin-right: 0.5rem;
+}
+
+body.ians-fix-short main {
+	flex: 1 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	color: var(--ians-colour-blue-mid);
+	margin-top: var(--size-200);
+	margin-bottom: var(--size-100);
+}
+
+h1 {
+	font-size: var(--size-300);
+	line-height: 1em;
+	margin-top: 0rem;
+	margin-bottom: 2rem;
+}
+
+h2 {
+	font-size: var(--size-200);
+	font-weight: 400;
+	margin-top: var(--size-400);
+}
+
+/* If h2 is first thing inside a div, the margin of the div collapses
+   and the h2 margin pushes the div down, leaving a gap between the
+	 two container divs. This selector replaces margin with padding for 
+	 this scenario.
+	 */
+div > h2:first-child {
+	margin-top: 0;
+	padding-top: var(--size-400);
+}
+
+h3 {
+	color: var(--ians-colour-blue-dark);
+	font-size: var(--size-100);
+	font-weight: 700;
+	margin-top: var(--size-400);
+	margin-bottom: var(--size-75);
+}
+
+h4 {
+	font-size: var(--size-100);
+}
+
+p,
+li {
+	max-width: var(--column-max-width);
+}
+
+p,
+blockquote {
+	margin-top: var(--size-200);
+	margin-bottom: var(--size-100);
+}
+
+h1 + p,
+h2 + p,
+h3 + p,
+h4 + p {
+	margin-top: 0;
+}
+
+a {
+	color: var(--ians-colour-blue-light);
+	text-decoration: underline;
+	text-decoration-color: var(--ians-colour-blue-light);
+	background-color: transparent;
+	transition: all 0.3s;
+}
+
+a:hover {
+	color: white;
+	text-decoration-color: white;
+	background-color: var(--ians-colour-blue-mid);
+}
+
+button {
+	padding: var(--size-25) var(--size-75);
+	color: var(--ians-colour-blue-light);
+	border: 1px solid var(--ians-colour-blue-light);
+	border-radius: 3px;
+	transition: color 0.2s ease-in-out, box-shadow 0.2s ease-in-out,
+		background-color 0.2s ease-in-out;
+}
+
+button:hover {
+	background-color: var(--ians-colour-blue-light);
+	color: white;
+}
+
+button:focus {
+	outline: none;
+	box-shadow: 0 0 0 3px var(--ians-colour-blue-light);
+}
+
+:focus {
+	outline: 2px dashed;
+	outline-offset: 0.25rem;
+}
+
+main:focus {
+	outline: none;
+}
+
+strong {
+	font-weight: 700;
+}
+
+figcaption {
+	font-size: var(--size-75);
+
+	font-style: italic;
+	margin-top: 1rem;
+}
+
+blockquote {
+	padding-left: var(--size-200);
+	border-left: 5px solid;
+	font-style: italic;
+}
+
+::selection {
+	color: #fff;
+	background: var(--ians-colour-blue-mid);
+}
+
+footer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
+	padding: var(--size-200) var(--size-50);
+	color: white;
+	background-color: #0f1120;
+}
+
+body.ians-fix-short footer {
+	flex-shrink: 0;
+}
+
+/* 
+
+..######...#######..##........#######..########.
+.##....##.##.....##.##.......##.....##.##.....##
+.##.......##.....##.##.......##.....##.##.....##
+.##.......##.....##.##.......##.....##.########.
+.##.......##.....##.##.......##.....##.##...##..
+.##....##.##.....##.##.......##.....##.##....##.
+..######...#######..########..#######..##.....##
+
+ */
+
+/* TEXT */
+
+.ians-text-blue-light {
+	color: var(--ians-colour-blue-light);
+}
+
+.ians-text-blue-mid {
+	color: var(--ians-colour-blue-mid);
+}
+
+.ians-text-blue-dark {
+	color: var(--ians-colour-blue-dark);
+}
+
+.ians-text-grey-light {
+	color: var(--ians-colour-grey-light);
+}
+
+.ians-text-grey-mid {
+	color: var(--ians-colour-grey-mid);
+}
+
+.ians-text-grey-dark {
+	color: var(--ians-colour-grey-dark);
+}
+
+.ians-text-highlight-light {
+	color: var(--ians-colour-highlight-light);
+}
+
+.ians-text-highlight-mid {
+	color: var(--ians-colour-highlight-mid);
+}
+
+.ians-text-highlight-dark {
+	color: var(--ians-colour-highlight-dark);
+}
+
+/* BG */
+
+.ians-bg-blue-light {
+	background-color: var(--ians-colour-blue-light);
+}
+
+.ians-bg-blue-mid {
+	background-color: var(--ians-colour-blue-mid);
+	color: white;
+}
+
+.ians-bg-blue-dark {
+	background-color: var(--ians-colour-blue-dark);
+	color: white;
+}
+
+.ians-bg-grey-light {
+	background-color: var(--ians-colour-grey-light);
+}
+
+.ians-bg-grey-mid {
+	background-color: var(--ians-colour-grey-mid);
+}
+
+.ians-bg-grey-dark {
+	background-color: var(--ians-colour-grey-dark);
+	color: white;
+}
+
+.ians-bg-highlight-light {
+	background-color: var(--ians-colour-highlight-light);
+}
+
+.ians-bg-highlight-mid {
+	background-color: var(--ians-colour-highlight-mid);
+	color: white;
+}
+
+.ians-bg-highlight-dark {
+	background-color: var(--ians-colour-highlight-dark);
+	color: white;
+}
+
+/* 
+
+.##..........###....##....##..#######..##.....##.########...
+.##.........##.##....##..##..##.....##.##.....##....##......
+.##........##...##....####...##.....##.##.....##....##......
+.##.......##.....##....##....##.....##.##.....##....##......
+.##.......#########....##....##.....##.##.....##....##......
+.##.......##.....##....##....##.....##.##.....##....##......
+.########.##.....##....##.....#######...#######.....##......
+
+ */
+
+.ians-column,
+.ians-column-double,
+.ians-column-wide-1,
+.ians-column-wide-2,
+.ians-column-wide-3,
+.ians-column-wide-4 {
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0 var(--ians-size-sides-small);
+}
+
+.ians-column {
+	max-width: var(--column-max-width);
+}
+
+.ians-column-double {
+	max-width: calc(var(--column-max-width) * 2 + 1rem);
+	grid-column-gap: 3em;
+}
+
+.ians-column-double.ians-grid-2 {
+	grid-column-gap: 3em;
+}
+
+.ians-column-wide-1 {
+	max-width: calc(var(--column-max-width) + 4rem);
+}
+
+.ians-column-wide-2 {
+	max-width: calc(var(--column-max-width) + 12rem);
+}
+
+.ians-column-wide-3 {
+	max-width: calc(var(--column-max-width) + 20rem);
+}
+
+.ians-column-wide-4 {
+	max-width: calc(var(--column-max-width) + 28rem);
+}
+
+/* 
+
+.##.....##.########.####.##........######....
+.##.....##....##.....##..##.......##....##...
+.##.....##....##.....##..##.......##.........
+.##.....##....##.....##..##........######....
+.##.....##....##.....##..##.............##...
+.##.....##....##.....##..##.......##....##...
+..#######.....##....####.########..######....
+
+ */
+
+.ians-welcome-page-title {
+	min-height: 85vh;
+	background-color: #036;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 50% 50%;
+	color: white;
+	padding: 0 0.5rem;
+	display: flex;
+}
+
+.ians-welcome-page-title > div {
+	align-self: center;
+	margin: 0 auto;
+	padding-bottom: 1rem;
+}
+
+.ians-welcome-page-title h1 {
+	color: white;
+	max-width: 20ch;
+}
+
+.ians-welcome-page-title > div p {
+	max-width: 50ch;
+	margin-top: 0;
+}
+
+.ians-image-full {
+	padding: var(--size-50);
+	padding-bottom: 0;
+	height: 90vh;
+	background-image: linear-gradient(
+			45deg,
+			rgba(0, 51, 102, 0.3) 0%,
+			rgba(0, 51, 102, 0.6) 100%
+		),
+		url(images/montage-02.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 50% 50%;
+	color: white;
+	text-shadow: 1px 1px 0 black;
+	transition: background-position 0.3s;
+}
+
+.ians-image-full.ians-image-full-zoom:hover {
+	background-position: 53% 53%;
+}
+
+.ians-image-full-text-container {
+	margin: 0 auto;
+	height: 100%;
+	max-width: 1150px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.ians-image-full-text-container h2 {
+	color: white;
+}
+
+/* Image zooom */
+
+.ians-bg-img-zoom {
+	position: relative;
+	width: 100%;
+	justify-self: center;
+	/* max-width: 340px; */
+	min-height: 240px;
+	background-color: #333;
+	background-repeat: no-repeat;
+	background-size: 115%;
+	background-position: 50% 50%;
+	transition: all 0.3s;
+}
+
+.ians-bg-img-zoom:hover,
+.ians-bg-img-zoom:focus {
+	background-size: 125%;
+}
+
+.ians-bg-img-zoom::before {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.35);
+}
+
+.ians-bg-img-zoom > div {
+	position: absolute;
+	bottom: 0;
+	padding: 1rem;
+	right: 0;
+	text-align: right;
+	color: white;
+	text-shadow: 1px 1px 0 black;
+}
+
+.ians-bg-img-zoom > span {
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	position: absolute;
+	top: 0.5rem;
+	left: 0.5rem;
+	font-size: 0.6rem;
+	background-color: #f7e917;
+	background-color: rgba(247, 233, 23, 0.9);
+	/* background-color: golden; */
+	color: #036;
+	border-radius: 3px;
+	padding: 0 0.5rem;
+	/* font-weight: bold; */
+}
+
+.ians-bg-img-zoom > div p:last-child {
+	margin-bottom: 0;
+}
+
+div[class^="ians-video"] {
+	position: relative;
+	margin-top: 3rem;
+	margin-bottom: 3rem;
+}
+
+div[class^="ians-video"] iframe,
+div[class^="ians-video"] object,
+div[class^="ians-video"] embed {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.ians-video-16-9 {
+	padding-bottom: 56.25%;
+}
+
+.ians-lms-banner {
+	position: sticky;
+	top: 0;
+	left: 0;
+	background-color: #3399cc;
+	height: 54px;
+	overflow: hidden;
+}
+
+.ians-lms-banner a {
+	display: block;
+	line-height: 54px;
+	height: 54px;
+	color: white;
+	font-weight: bold;
+	padding-left: 2rem;
+}
+
+/*  
+
+.########..........##.....##.########.
+.##.....##.........###...###.##.....##
+.##.....##.........####.####.##.....##
+.########..#######.##.###.##.##.....##
+.##.....##.........##.....##.##.....##
+.##.....##.........##.....##.##.....##
+.########..........##.....##.########.
+
+*/
+
+@screen md {
+	h1 {
+		font-size: var(--size-500);
+		line-height: var(--size-500);
+		/* text-align: center; */
+	}
+
+	h2 {
+		font-size: var(--size-400);
+	}
+
+	h3,
+	h4 {
+		font-size: var(--size-200);
+	}
+
+	p,
+	blockquote {
+		font-size: var(--size-120);
+	}
+
+	footer {
+		padding: var(--size-400) var(--size-50);
+	}
+
+	/* ..######...########..####.########.
+	/* .##....##..##.....##..##..##.....##
+	/* .##........##.....##..##..##.....##
+	/* .##...####.########...##..##.....##
+	/* .##....##..##...##....##..##.....##
+	/* .##....##..##....##...##..##.....##
+	/* ..######...##.....##.####.########. */
+
+	.ians-grid-2 {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: 1fr;
+		grid-column-gap: var(--ians-grid-gaps);
+		grid-row-gap: var(--ians-grid-gaps);
+	}
+
+	.ians-grid-3 {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: 1fr;
+		grid-column-gap: var(--ians-grid-gaps);
+		grid-row-gap: var(--ians-grid-gaps);
+	}
+
+	.ians-grid-4 {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: 1fr;
+		grid-column-gap: var(--ians-grid-gaps);
+		grid-row-gap: var(--ians-grid-gaps);
+	}
+
+	.ians-grid-5 {
+		display: grid;
+		grid-template-columns: repeat(15, 1fr);
+		grid-template-rows: 1fr;
+		grid-column-gap: var(--ians-grid-gaps);
+		grid-row-gap: var(--ians-grid-gaps);
+	}
+
+	.ians-grid-5 > *:nth-child(-1n + 3) {
+		grid-column: span 5;
+	}
+	.ians-grid-5 > *:nth-last-child(2) {
+		grid-row-start: 2;
+		grid-column: 3 / span 5;
+	}
+	.ians-grid-5 > *:nth-last-child(1) {
+		grid-row-start: 2;
+		grid-column: 8 / span 5;
+	}
+
+	.ians-grid-3.ians-grid-sidebars-3 {
+		grid-template-columns: 1fr minmax(auto, var(--column-max-width)) 1fr;
+		grid-template-rows: auto;
+		/* grid-column-gap: calc(var(--ians-size-sides-small) *); */
+	}
+
+	.ians-grid-3.ians-grid-sidebars-3 > div:nth-child(2) {
+		padding: 0 var(--ians-size-sides-small);
+	}
+
+	/* .##.....##.########.####.##........######.
+	/* .##.....##....##.....##..##.......##....##
+	/* .##.....##....##.....##..##.......##......
+	/* .##.....##....##.....##..##........######.
+	/* .##.....##....##.....##..##.............##
+	/* .##.....##....##.....##..##.......##....##
+	/* ..#######.....##....####.########..######. */
+
+	.ians-welcome-page-title {
+		min-height: 65vh;
+		padding: 0 1rem;
+	}
+
+	.ians-welcome-page-title h1 {
+		margin: 0;
+		padding: 0;
+	}
+
+	.ians-image-full {
+		height: 60vh;
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+	}
+}
+
+/* 
+
+.########..........##........######.....
+.##.....##.........##.......##....##....
+.##.....##.........##.......##..........
+.########..#######.##.......##...####...
+.##.....##.........##.......##....##....
+.##.....##.........##.......##....##....
+.########..........########..######.....
+
+ */
+
+@screen lg {
+	/* ..######...#######..########..########
+	/* .##....##.##.....##.##.....##.##......
+	/* .##.......##.....##.##.....##.##......
+	/* .##.......##.....##.########..######..
+	/* .##.......##.....##.##...##...##......
+	/* .##....##.##.....##.##....##..##......
+	/* ..######...#######..##.....##.######## */
+
+	h1 {
+		margin-bottom: 4rem;
+	}
+
+	.ians-breadcrumb {
+		margin-top: 3rem;
+	}
+
+	/* ..######...########..####.########.
+	/* .##....##..##.....##..##..##.....##
+	/* .##........##.....##..##..##.....##
+	/* .##...####.########...##..##.....##
+	/* .##....##..##...##....##..##.....##
+	/* .##....##..##....##...##..##.....##
+	/* ..######...##.....##.####.########. */
+
+	.ians-grid-4 {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-template-rows: 1fr;
+		grid-column-gap: var(--ians-grid-gaps);
+		grid-row-gap: var(--ians-grid-gaps);
+	}
+
+	.ians-grid-5 > *:nth-child(-1n + 3) {
+		grid-column: span 3;
+	}
+	.ians-grid-5 > *:nth-last-child(2) {
+		grid-row-start: auto;
+		grid-column: span 3;
+	}
+	.ians-grid-5 > *:nth-last-child(1) {
+		grid-row-start: auto;
+		grid-column: span 3;
+	}
+
+	/* .##.....##.########.####.##........######.
+	/* .##.....##....##.....##..##.......##....##
+	/* .##.....##....##.....##..##.......##......
+	/* .##.....##....##.....##..##........######.
+	/* .##.....##....##.....##..##.............##
+	/* .##.....##....##.....##..##.......##....##
+	/* ..#######.....##....####.########..######. */
+
+	.ians-welcome-page-title > div p {
+		max-width: 40ch;
+	}
+
+	.ians-image-full {
+		height: 60vh;
+		background-image: linear-gradient(
+				45deg,
+				rgba(255, 255, 255, 0) 31%,
+				rgba(0, 51, 102, 1) 100%
+			),
+			url(images/montage-02.jpg);
+	}
+
+	.ians-image-full-text-container {
+		justify-content: flex-end;
+	}
+
+	.ians-image-full-text-container > div {
+		max-width: 60ch;
+		padding: 0.5rem;
+	}
+}

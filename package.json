@@ -1,0 +1,64 @@
+{
+  "name": "netlify-review-test",
+  "version": "0.0.1",
+  "description": "A template to create e-learning content at IANS.",
+  "scripts": {
+    "clean": "dotenv cross-var rimraf %COURSE_PRODUCTION_FOLDER%",
+    "develop:eleventy": "eleventy --serve",
+    "develop:postcss": "dotenv -- cross-var postcss %COURSE_INPUT_FOLDER%/**/*.css --base %COURSE_INPUT_FOLDER% --dir %COURSE_PRODUCTION_FOLDER% --watch",
+    "develop:js": "rollup -c --watch",
+    "dev": "cross-env NODE_ENV=development npm-run-all --sequential clean build:js build:postcss --parallel develop:*",
+    "build:eleventy": "cross-env ELEVENTY_PRODUCTION=true eleventy",
+    "build:postcss": "dotenv -- cross-var cross-env NODE_ENV=production postcss %COURSE_INPUT_FOLDER%/**/*.css  --base %COURSE_INPUT_FOLDER% --dir %COURSE_PRODUCTION_FOLDER%",
+    "build:js": "cross-env NODE_ENV=production rollup -c",
+    "build:zip": "node _utilities/zip-it-and-ship-it.js",
+    "build:http-server": "dotenv cross-var http-server %COURSE_PRODUCTION_FOLDER% -c-1",
+    "build": "run-s clean build:postcss build:eleventy build:js",
+    "debug": "DEBUG=* eleventy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/11ty/eleventy-base-blog.git"
+  },
+  "author": {
+    "name": "Patrick Grey",
+    "email": "websemantic@yahoo.co.uk",
+    "url": "https://risingsky.co.uk/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/11ty/eleventy-base-blog/issues"
+  },
+  "homepage": "https://github.com/11ty/eleventy-base-blog#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^0.12.1",
+    "@11ty/eleventy-img": "^0.8.3",
+    "@babel/core": "^7.14.0",
+    "@babel/preset-env": "^7.14.1",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^19.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "adm-zip": "^0.5.5",
+    "autoprefixer": "^10.2.5",
+    "clean-css": "^5.1.2",
+    "cross-env": "^7.0.3",
+    "cross-var": "^1.1.0",
+    "cssnano": "^5.0.2",
+    "directory-tree": "^2.2.9",
+    "dotenv": "^9.0.2",
+    "dotenv-cli": "^4.0.0",
+    "fast-glob": "^3.2.5",
+    "http-server": "^0.12.3",
+    "npm-run-all": "^4.1.5",
+    "path": "^0.12.7",
+    "postcss": "^8.2.15",
+    "postcss-cli": "^8.3.1",
+    "postcss-nested": "^5.0.5",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.47.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "tailwindcss": "^2.1.2"
+  },
+  "dependencies": {}
+}
